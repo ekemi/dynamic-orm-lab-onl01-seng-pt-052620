@@ -30,7 +30,9 @@ attr_accessor :id , :name , :grade
 
   end
 
-
+def table_name_for_insert
+  self.class.table_name
+end
 def table_name_for_insert
   self.class.column_names.delete_if { |col| col==id  }.join(",  ")
 end
