@@ -36,4 +36,11 @@ end
 def col_names_for_insert
   self.class.column_names.delete_if{|col| col == "id"}.join(", ")
 end
+
+def values_for_insert
+  value = []
+  self.class.column_names.each do |column_name|
+      value << "'#{send(column_name)}'" unless send(column_name).nil?
+  end
+end
 end
