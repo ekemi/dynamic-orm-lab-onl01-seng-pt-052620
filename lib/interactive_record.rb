@@ -9,9 +9,17 @@ class InteractiveRecord
     self.to_s.downcase.pluralize
 
   end
-  binding.pry
 
   def self.column_names
+
+    DB[:conn].result_as_has = true
+    sql = "PRAGMA table_info('#{table_name}')"
+    table_info = DB[:conn].excute(sql)
+    column_names = []
+    table_info.each do |col|
+      column_names << col["name"]
+    end
+    column_names.compact
 
   end
 
